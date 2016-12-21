@@ -6,20 +6,47 @@
     <link rel="shortcut icon" href="{{ url_for('static', filename='favicon.png') }}" />
     <link rel="stylesheet" href="{{ url_for('static', filename='css/reset.css') }}">
     <link rel="stylesheet" href="{{ url_for('static', filename='css/bootstrap.css') }}">
+    <script type="text/javascript" src="https://maps.googleapis.com/maps/api/js"></script>
+    <script type="text/javascript">
+        var map;
+        var marker;
+        function initialize() {
+            var mapOptions = {
+                center: new google.maps.LatLng(44.806260, 20.450962),
+                zoom: 12
+            };
+            map = new google.maps.Map(document.getElementById("map-canvas"), mapOptions);
+            google.maps.event.addListener(map, 'click',
+            function(event){
+                placeMarker(event.latLng);
+            });
+
+            function placeMarker(location){
+                if(marker){
+                    marker.setPosition(location);
+                }else{
+                    marker = new google.maps.Marker({
+                    position: location, 
+                    map: map
+                });
+                }
+            }
+        }
+    </script>
 </head>
 
-<body class="container">
+<body class="container" onload="initialize()">
+    <div id="map-canvas" style="width:80%; height:500px"></div>
     <div class="well">
         Tag Map - index template
     </div>
 
     <h1>Crime map</h1>
-    <form action="/add" method="post">
+    <form action="add" method="post">
         <input type="text" name="userinput">
         <input type="submit" value="Save">
     </form>
-    <a href="/clear">clear</a> 
-    {% for userinput in data %}
+    <a href="clear">clear</a> {% for userinput in data %}
     <p>{{userinput}}</p>
     {% endfor %}
 
