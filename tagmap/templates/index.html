@@ -2,11 +2,20 @@
 <html>
 
 <head>
-    <title>Title</title>
+    <title>TagMap</title>
+    <link rel="shortcut icon" href="{{ url_for('static', filename='favicon.png') }}"/>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/reset.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/bootstrap.css') }}">
 </head>
 
-<body>
-    Tag map - index template
+<body class="container">
+    <div class="well">
+        Tag Map - index template
+    </div>
+
+
+<script src="{{ url_for('static', filename='js/jquery-3.1.1.min.js') }}"></script>
+<script src="{{ url_for('static', filename='js/bootstrap.min.js') }}"></script>
 </body>
 
 </html>
